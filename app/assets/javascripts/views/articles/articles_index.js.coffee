@@ -12,8 +12,8 @@ class ReadTogether.Views.ArticlesIndex extends Backbone.View
     @collection.on('change', @render, this)
     @collection.on('destroy', @render, this)
 
-  createArticleEvent: ->
-    console.log("test")
+  createArticleEvent: =>
+    @collection.fetch({reset: true})
 
   destroyCommentEvent: =>
     @collection.fetch({reset: true})

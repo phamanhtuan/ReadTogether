@@ -22,6 +22,6 @@ class ReadTogether.Views.Article extends Backbone.View
 		})
 		@
 
-	deleteArticle: ->
+	deleteArticle: =>
 		console.log('test')
 		@model.destroy()
