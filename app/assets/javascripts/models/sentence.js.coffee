@@ -1,0 +1,1 @@
+class ReadTogether.Models.Sentence extends Backbone.Model

@@ -1,0 +1,42 @@
+  <div class="panel-heading">  	   
+	<a href='/article/<%= @sentences.article_id %>'>
+		<% headers = @sentences.where({'paragraph': 0}) %>	
+		
+		<% if headers.length == 0 : %>
+			No tittle 		
+		<% else %>
+			<% header_final = [] %>
+			<% for header in headers :%>
+				<% header_final.push(header.get('content')) %>	
+			<% end %>
+			<% header_final_join = header_final.join(" ") %>		
+			<%= header_final_join.trimToLength(100) %>
+	</a>
+  </div>
+  <div class="panel-body">    
+  	<% body_final = [] %>
+  	<% paragraph=1  %>
+	<% for sentence in @sentences.models: %>
+		<% if sentence.get('paragraph') != 0 : %>
+			<% body_final.push(sentence.get('content')) %>	
+			<% if sentence.get('paragraph') !=paragraph :%>
+				<% body_final.push("||") %>	
+				<% paragraph = sentence.get('paragraph') %>	
+			<% end %>
+		<% end %>		
+	<% end %>
+	<% test = body_final.join(" ").trimToLength(400).split("||") %>
+	<% for sentence in test: %>
+		<%= sentence %>		
+		<br/>	
+	<% end %>
+	
+  </div>
+  <div class="panel-footer clearfix">
+  		<div class='function-btn pull-right '>
+			<a href='/article/<%= @sentences.article_id %>'>
+			<span class="function-btn read-it-btn glyphicon glyphicon-hand-right" data-title="read it">&nbsp;</span>
+			</a>
+		</div>
+  </div>
+

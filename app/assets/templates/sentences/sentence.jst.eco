@@ -1,0 +1,5 @@
+<% if @sentence.get('paragraph') == 0 :%>
+	<h3 ><%= @sentence.get('content')%><h3>
+<% else :%>
+	<span><%= @sentence.get('content')%><span>
+<% end %>

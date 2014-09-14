@@ -1,0 +1,18 @@
+               Prefix Verb   URI Pattern                                             Controller#Action
+    sentence_comments GET    /api/sentences/:sentence_id/comments(.:format)          comments#index
+                      POST   /api/sentences/:sentence_id/comments(.:format)          comments#create
+ new_sentence_comment GET    /api/sentences/:sentence_id/comments/new(.:format)      comments#new
+edit_sentence_comment GET    /api/sentences/:sentence_id/comments/:id/edit(.:format) comments#edit
+     sentence_comment GET    /api/sentences/:sentence_id/comments/:id(.:format)      comments#show
+                      PATCH  /api/sentences/:sentence_id/comments/:id(.:format)      comments#update
+                      PUT    /api/sentences/:sentence_id/comments/:id(.:format)      comments#update
+                      DELETE /api/sentences/:sentence_id/comments/:id(.:format)      comments#destroy
+            sentences GET    /api/sentences(.:format)                                sentences#index
+                      POST   /api/sentences(.:format)                                sentences#create
+         new_sentence GET    /api/sentences/new(.:format)                            sentences#new
+        edit_sentence GET    /api/sentences/:id/edit(.:format)                       sentences#edit
+             sentence GET    /api/sentences/:id(.:format)                            sentences#show
+                      PATCH  /api/sentences/:id(.:format)                            sentences#update
+                      PUT    /api/sentences/:id(.:format)                            sentences#update
+                      DELETE /api/sentences/:id(.:format)                            sentences#destroy
+                 root GET    /                                                       main#index

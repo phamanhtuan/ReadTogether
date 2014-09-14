@@ -1,0 +1,31 @@
+<ul class="pagination pagination-sm pull-right" style='margin: 0'>
+<% if(@pageInfo.pages > 1) : %>
+  <% if(@pageInfo.prev)  :%>
+      <li > <a href="#" class="prev">previous</a></li>
+  <% else :%>
+      <li class='disabled'> <a >previous</a></li>
+  <% end %>
+    
+
+  <% if( parseInt(@pageInfo.min) > 1 ) :%>
+    <li ><a >...</a></li>
+  <% end %>
+  <% for i in [@pageInfo.min..@pageInfo.max]  :%>      
+      <% if( parseInt(@pageInfo.page) == i) :%>
+          <li class='active'><a ><%= i %></a></li>
+      <% else :%>
+          <li><a href="#" class='pagination-btn' ><%= i %></a></li>
+      <% end %>
+      
+  <% end %>
+  <% if( parseInt(@pageInfo.max) < @pageInfo.pages) :%>
+    <li ><a >...</a></li>
+  <% end %>
+
+  <% if(@pageInfo.next) : %>
+    <li><a href="#" class="next">next</a></li>
+  <% else :%>
+      <li class='disabled'> <a >next</a></li>
+  <% end %>
+
+</ul>

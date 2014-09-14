@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ReadTogether</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>  
+  <% if content_for?(:templates) %>
+	  <%= yield(:templates) %>
+	<% end %>
+  <% if content_for?(:javascripts) %>
+	  <%= yield(:javascripts) %>
+	<% end %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header class="navbar navbar-default" role="navigation" >
+  <a class="navbar-brand" href="/">Read together</a>
+  <div class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+      <input type="text" class="form-control " placeholder="Search">
+    </div>    
+  </div>
+  
+</header>
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<% if @comments.models.length: %>
+	<div id="add-comment" class="panel-heading"></div>  
+  	<div id="comments-template" class="panel-body" class="list-group"></div>
+  	<div id="pagination" class="panel-footer clearfix" style="padding: 5px"></div>
+<% else: %>
+	<div id="add-comment"  class="panel-heading">
+		<p >Click a sentence to add and view all comments</p>
+	</div>
+<% end %>
+
+

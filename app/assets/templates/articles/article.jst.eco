@@ -1,0 +1,4 @@
+<div class='pull-right'>
+	<span class="function-btn edit-btn glyphicon glyphicon-pencil" data-title="edit"></span>
+	<span class="delete-btn function-btn  glyphicon glyphicon-remove" data-title="delete"></span>
+</div>
