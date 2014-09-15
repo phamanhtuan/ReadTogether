@@ -6,6 +6,7 @@ class ReadTogether.Views.ArticleSentences extends Backbone.View
 		@collection.on('reset', @render, this)	
 
 	render: ->		
+		sentences = []
 		$(@el).html(@template(sentences: @collection))
 		@$('span.function-btn').tooltip({ 'trigger': 'hover', 'placement': 'top'})
 		@

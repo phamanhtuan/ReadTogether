@@ -40,10 +40,19 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		@sentence = Sentence.find(params[:sentence_id])
-		@comment = Comment.find(params[:id]);
-		@comment.update_attributes(comment_params)
-		respond_with @sentence, @comment		
+		article = Article.find(params[:id])	
+		sentences_old = article.sentences.collect{|x| x[:id]}
+		result = create_sentences(params[:id], params[:content])
+		if result
+			sentences_old.each do |sentence|
+				Sentence.find(sentence).destroy()
+			end
+			respond_with result
+		else
+			respond_to do |format|
+	            format.json { render json: result, status: :unprocessable_entity }
+	        end		
+    	end
 	end
 
 	def destroy
@@ -54,4 +63,25 @@ class ArticlesController < ApplicationController
 	    def article_params
 	      params.permit(:content)
 	    end	
+		def create_sentences(article_id, content)
+			tmp = 	content.gsub(/\n+/, "\n")
+			if tmp.length == 0 
+				return false
+			end
+			paragraphs = tmp.split("\n")
+			paragraph_id=0
+			paragraphs.each do |paragraph|
+				if paragraph_id == 0
+					Sentence.create({paragraph: paragraph_id, position: 0, content: paragraph, article_id: article_id})
+				else
+					position_id = 0
+					sentences = paragraph.split(/(?<=[?.!])\s*/)
+					sentences.each do |sentence|
+						Sentence.create({paragraph: paragraph_id, position: position_id, content: sentence, article_id: article_id})
+						position_id = position_id +1
+					end
+				end
+				paragraph_id = paragraph_id+1
+			end 
+		end
 end

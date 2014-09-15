@@ -17,16 +17,16 @@
   	<% body_final = [] %>
   	<% paragraph=1  %>
 	<% for sentence in @sentences.models: %>
-		<% if sentence.get('paragraph') != 0 : %>
-			<% body_final.push(sentence.get('content')) %>	
+		<% if sentence.get('paragraph') != 0 : %>			
 			<% if sentence.get('paragraph') !=paragraph :%>
 				<% body_final.push("||") %>	
 				<% paragraph = sentence.get('paragraph') %>	
 			<% end %>
+			<% body_final.push(sentence.get('content')) %>	
 		<% end %>		
 	<% end %>
-	<% test = body_final.join(" ").trimToLength(400).split("||") %>
-	<% for sentence in test: %>
+	<% body_text = body_final.join(" ").trimToLength(400).split("||") %>
+	<% for sentence in body_text: %>
 		<%= sentence %>		
 		<br/>
 	<% end %>

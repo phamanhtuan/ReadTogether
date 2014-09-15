@@ -5,7 +5,6 @@ class ReadTogether.Collections.Articles extends PaginatedCollection
 		article1.get('updated_at') < article2.get('updated_at')
 	sync: (method, model, options) ->
 	   	options || (options = {})
-	   	console.log( method)
 	   	if(method =='read')
 	   		options.url = "/api/articles"+"?" + $.param({page: this.page})
 	   	else
