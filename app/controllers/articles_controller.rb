@@ -40,9 +40,9 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		article = Article.find(params[:id])	
-		sentences_old = article.sentences.collect{|x| x[:id]}
-		result = create_sentences(params[:id], params[:content])
+		@article = Article.find(params[:id])	
+		sentences_old = @article.sentences.collect{|x| x[:id]}
+		result = create_sentences(@article[:id], params[:content])
 		if result
 			sentences_old.each do |sentence|
 				Sentence.find(sentence).destroy()

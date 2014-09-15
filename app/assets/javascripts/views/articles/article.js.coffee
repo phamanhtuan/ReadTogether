@@ -14,7 +14,7 @@ class ReadTogether.Views.Article extends Backbone.View
 		)
 
 	successfulUpdate: (model, response) =>
-		$("#editArticleModal").modal('hide')
+		@$("#editArticleModal").modal('hide')
 		$('body').removeClass('modal-open')
 		$('.modal-backdrop').remove()
 	
@@ -36,8 +36,8 @@ class ReadTogether.Views.Article extends Backbone.View
 			body[sentence.get('paragraph')].push(sentence.get('content'))
 		for paragraph in body
 			body_final.push(paragraph.join(" "))
-		$("#editArticleModal #content-box").val(body_final.join("\n"))
-		$("#editArticleModal").modal('show')
+		@$("#content-box").val(body_final.join("\n"))
+		@$("#editArticleModal").modal('show')
 		
 	render: ->		
 		$(@el).html(@template(sentences: @model))	
