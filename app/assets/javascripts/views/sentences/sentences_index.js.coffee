@@ -12,8 +12,7 @@ class ReadTogether.Views.SentencesIndex extends Backbone.View
     @collection.each(@renderSentence)
     @
 
-  renderSentence: (sentence)=> 
-    console.log(sentence.get('paragraph'))   
+  renderSentence: (sentence)=>  
     view = new ReadTogether.Views.Sentence(model: sentence)
     if(@paragraph_id != sentence.get('paragraph'))
       @paragraph_id = sentence.get('paragraph')
