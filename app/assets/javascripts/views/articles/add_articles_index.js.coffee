@@ -14,6 +14,7 @@ class ReadTogether.Views.AddingArticle extends Backbone.View
 
 	successfulUpdate: (model, response) ->
 		$('#myModal').modal('hide')
+		$("#myModal #content-box").val("")
 		Backbone.pubSub.trigger('createArticle')
 
 	handleError: (model, response) ->
