@@ -5,7 +5,7 @@ window.ReadTogether =
   Routers: {}
   initialize: ->
   	Backbone.pubSub = _.extend({}, Backbone.Events)
-  	new ReadTogether.Routers.Articles()  	
-  	Backbone.history.start()
+  	@router = new ReadTogether.Routers.Articles()  	
+  	Backbone.history.start(pushState:true)
 $(document).ready ->
   ReadTogether.initialize()  

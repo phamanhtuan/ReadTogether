@@ -7,6 +7,7 @@ class ReadTogether.Views.Article extends Backbone.View
 		'click #save-btn': 'editArticleSubmit'
 		'keydown input[name=tag-input-box]' : 'addTag'	
 		'click #editArticleModal .tags-list a' : 'deleteTag'
+		
 	initialize: ->
 		@model.on("reset", @render, this)
 
@@ -78,9 +79,10 @@ class ReadTogether.Views.Article extends Backbone.View
 	render: ->				
 		$(@el).html(@template(model: @model))	
 		for tag in @model.get('tags')				
-			attributes_a= { text: tag['title']}
-			attributes_span= { class: 'label-size'}
-			@$(".tags-box").append($('<span/>',attributes_span ).html($('<a/>',attributes_a )))
+			if typeof tag['title'] != "undefined"					
+				attributes_a= { text: tag['title']}
+				attributes_span= { class: 'label-size tag-btn'}
+				@$(".tags-box").append($('<span/>',attributes_span ).html($('<a/>',attributes_a )))
 		# @sentencesCollection = new ReadTogether.Collections.ArticleSentences({article_id: @model.get('id')})
 		# @sentencesCollection.fetch({reset: true})
 		# @sentencesView = new ReadTogether.Views.ArticleSentences(collection: @sentencesCollection)

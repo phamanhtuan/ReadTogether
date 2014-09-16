@@ -1,8 +1,13 @@
 class ArticlesController < ApplicationController
 	respond_to :json
 
-	def index		
-		@articles = Article.all.order('updated_at DESC').paginate(:page => params[:page], :per_page =>7)	
+	def index	
+		tag = params[:tag]
+		if tag == nil	
+			@articles = Article.all.order('updated_at DESC').paginate(:page => params[:page], :per_page =>7)	
+		else 			
+			@articles =  Article.includes(:article_tag_assignments=> :tag).where('tags.title' =>URI.decode(tag)).order('articles.updated_at DESC').paginate(:page => params[:page], :per_page =>7)
+		end
 		respond_to do |format|
             format.json { render json: {models: @articles.as_json, total: @articles.count, per_page: 7, page: params[:page] } }
         end
@@ -14,29 +19,42 @@ class ArticlesController < ApplicationController
 
 	def create		
 		@article = Article.create()	
-		@tmp = 	article_params[:content].gsub(/\n+/, "\n")
-		@paragraphs = @tmp.split("\n")
-		paragraph_id=0
-		@paragraphs.each do |paragraph|
-			if paragraph_id == 0
-				Sentence.create({paragraph: paragraph_id, position: 0, content: paragraph, article_id: @article.id})
-			else
-				position_id = 0
-				sentences = paragraph.split(/(?<=[?.!])\s*/)
-				sentences.each do |sentence|
-					Sentence.create({paragraph: paragraph_id, position: position_id, content: sentence, article_id: @article.id})
-					position_id = position_id +1
-				end
-			end
-			paragraph_id = paragraph_id+1
-		end 
+		tags = params[:tags]
+		result = false
+		@article.transaction do
+			create_tags(@article[:id], tags)
+			result = create_sentences(@article[:id], params[:content])
+		end	
+		if result
+			respond_with @article
+		else
+			respond_to do |format|
+	            format.json { render json: result, status: :unprocessable_entity }
+	        end		
+    	end
+		# @tmp = 	article_params[:content].gsub(/\n+/, "\n")
+		# @paragraphs = @tmp.split("\n")
+		# paragraph_id=0
+		# @paragraphs.each do |paragraph|
+		# 	if paragraph_id == 0
+		# 		Sentence.create({paragraph: paragraph_id, position: 0, content: paragraph, article_id: @article.id})
+		# 	else
+		# 		position_id = 0
+		# 		sentences = paragraph.split(/(?<=[?.!])\s*/)
+		# 		sentences.each do |sentence|
+		# 			Sentence.create({paragraph: paragraph_id, position: position_id, content: sentence, article_id: @article.id})
+		# 			position_id = position_id +1
+		# 		end
+		# 	end
+		# 	paragraph_id = paragraph_id+1
+		# end 
 		# @arr = (article_params[:content]).split(".")
 		# i = 0
 		# @arr.each do |el|
 		# 	Sentence.create({paragraph: 1, position: i, content: el, article_id: @article.id})
 		# 	i = i+1
 		# end		
-		respond_with @article
+		# respond_with @article
 	end
 
 	def update

@@ -5,12 +5,19 @@ class ReadTogether.Views.ArticlesIndex extends Backbone.View
     'click .pagination .next' : 'nextPagination'
     'click .pagination .prev' : 'prevPagination'
     'click .pagination .pagination-btn' : 'goPagination'
+    'click .tag-btn' : "goTagPage"
     
   initialize: ->
     Backbone.pubSub.on('createArticle', @createArticleEvent)
     @collection.on('reset', @render, this)
     @collection.on('change', @render, this)
     @collection.on('destroy', @render, this)
+
+  goTagPage: (event) ->
+    event.preventDefault()
+    tag = $(event.target).text()
+    @collection.page = 1
+    window.ReadTogether.router.navigate("tag/"+encodeURIComponent(tag), {trigger: true})
 
   createArticleEvent: =>
     @collection.fetch({reset: true})
