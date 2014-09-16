@@ -1,3 +1,5 @@
+@import "compass/css3"
+
 span.delete-btn, span.edit-btn, .read-it-btn
 	opacity: 0.5
 	cursor: pointer
@@ -12,3 +14,53 @@ span.delete-btn, span.edit-btn, .read-it-btn
 	font-size: 13px
 .header-text
 	height: 100%
+
+.label-size
+	margin: 0
+	padding: 0
+	position: relative
+	cursor: pointer
+	a
+		float: left
+		height: 16px
+		line-height: 16px
+		position: relative
+		font-size: 12px
+		margin-bottom: 9px
+		margin-left: 12px
+		padding: 0 10px 0 7px
+		background: #0089e0
+		color: white
+		text-decoration: none
+		+border-bottom-right-radius(4px)
+		+border-top-right-radius(4px)
+		&:before
+			content: ""
+			float: left
+			position: absolute
+			top: 0
+			left: -7px
+			width: 0
+			height: 0
+			border-color: transparent #0089e0 transparent transparent
+			border-style: solid
+			border-width: 8px 7px 8px 0
+		&:after
+			content: ""
+			position: absolute
+			top: 7px
+			left: 0
+			float: left
+			width: 3px
+			height: 3px
+			+border-radius(2px)
+			background: #fff
+			+box-shadow(-1px -1px 2px #004977)
+			box-shadow: -1px -1px 2px #004977
+		&:hover
+			background: #555
+			&:before
+				border-color: transparent #555 transparent transparent
+
+
+

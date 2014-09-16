@@ -2,14 +2,14 @@ class ArticlesController < ApplicationController
 	respond_to :json
 
 	def index		
-		@articles = Article.all.order('updated_at DESC').paginate(:page => params[:page], :per_page =>7)		
+		@articles = Article.all.order('updated_at DESC').paginate(:page => params[:page], :per_page =>7)	
 		respond_to do |format|
-            format.json { render json: {models: @articles, total: @articles.count, per_page: 7, page: params[:page] } }
+            format.json { render json: {models: @articles.as_json, total: @articles.count, per_page: 7, page: params[:page] } }
         end
 	end
 
 	def show
-		respond_with Comment.find(params[:id])
+		respond_with Article.find(params[:id])
 	end
 
 	def create		
@@ -40,9 +40,14 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		@article = Article.find(params[:id])	
+		@article = Article.find(params[:id])			
 		sentences_old = @article.sentences.collect{|x| x[:id]}
-		result = create_sentences(@article[:id], params[:content])
+		tags = params[:tags]
+		result = false
+		@article.transaction do
+			create_tags(@article[:id], tags)
+			result = create_sentences(@article[:id], params[:content])
+		end				
 		if result
 			sentences_old.each do |sentence|
 				Sentence.find(sentence).destroy()
@@ -83,5 +88,24 @@ class ArticlesController < ApplicationController
 				end
 				paragraph_id = paragraph_id+1
 			end 
+		end
+		def create_tags(article_id, tags)			
+			if tags.length == 0 
+				Article.find(article_id).article_tag_assignments.destroy_all 
+				return true
+			end
+			tags_arr = tags.split("||")
+			if	tags_arr.length == 0
+				Article.find(article_id).article_tag_assignments.destroy_all 
+				return true
+			end	
+			Article.find(article_id).article_tag_assignments.destroy_all 
+			tags_arr.each do |tag|
+				if(Tag.find_by_title(tag)  == nil)
+					Tag.create(title: tag )
+				end
+				Article.find(article_id).tags << Tag.find_by_title(tag)
+			end
+			
 		end
 end

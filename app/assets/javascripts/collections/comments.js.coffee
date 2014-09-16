@@ -6,7 +6,6 @@ class ReadTogether.Collections.Comments extends PaginatedCollection
 		comment1.get('updated_at') < comment2.get('updated_at')
 	sync: (method, model, options) ->
 	   	options || (options = {})
-	   	console.log( method)
 	   	if(method =='read')
 	   		options.url = "/api/articles/"+@article_id+"/sentences/"+@sentence_id+"/comments" +"?" + $.param({page: this.page})
 	   	else

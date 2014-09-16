@@ -1,5 +1,6 @@
 class ReadTogether.Collections.ArticleSentences extends Backbone.Collection
 	article_id: -1
+	
 	url: ->"/api/articles/"+@article_id+"/sentences"
 	initialize: (options) ->			
 		@article_id = options.article_id 

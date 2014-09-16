@@ -37,5 +37,6 @@
 			<span class="function-btn read-it-btn glyphicon glyphicon-hand-right" data-title="read it">&nbsp;</span>
 			</a>
 		</div>
+		<div class='function-btn pull-left .tags-box'>
   </div>
 

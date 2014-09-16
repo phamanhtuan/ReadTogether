@@ -28,6 +28,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem "backbone-on-rails"
+gem 'compass_twitter_bootstrap'
+gem 'compass-rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'will_paginate', '~> 3.0.pre4' 
 

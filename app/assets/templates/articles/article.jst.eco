@@ -1,7 +1,49 @@
-<div class='pull-right'>
-	<span class="function-btn edit-btn glyphicon glyphicon-pencil" data-title="edit"  ></span>
-	<span class="delete-btn function-btn  glyphicon glyphicon-remove" data-title="delete"></span>
+
+<div class="panel-heading">     
+  <div class='pull-right'>
+    <span class="function-btn edit-btn glyphicon glyphicon-pencil" data-title="edit"  ></span>
+    <span class="delete-btn function-btn  glyphicon glyphicon-remove" data-title="delete"></span>
+  </div>
+  <%= @model['article_id'] %>
+  <a href="/article/<%= @model.get('id') %>">
+    <% header_final = [] %>
+    <% for sentence in @model.get('sentences'): %>     
+      <% if sentence['paragraph'] == 0 : %>      
+        <% header_final.push(sentence['content']) %>  
+      <% end %>   
+    <% end %>
+    <%= header_final.join(" ") %> 
+  </a>
 </div>
+<div class="panel-body article-body" >    
+  <% body_final = [] %>
+  <% paragraph=1  %>
+
+<% for sentence in @model.get('sentences'): %>
+  <% if sentence['paragraph'] != 0 : %>     
+    <% if sentence['paragraph'] !=paragraph :%>
+      <% body_final.push("||") %> 
+      <% paragraph = sentence['paragraph'] %> 
+    <% end %>
+    <% body_final.push(sentence['content']) %>  
+  <% end %>   
+<% end %>
+<% body_text = body_final.join(" ").trimToLength(400).split("||") %>
+<% for sentence in body_text: %>
+  <%= sentence %>   
+  <br/>
+<% end %>
+</div>
+<div class="panel-footer clearfix">
+  <div class='function-btn pull-right '>
+    <a href="/article/<%= @model['id'] %>">
+      <span class="function-btn read-it-btn glyphicon glyphicon-hand-right" data-title="read it">&nbsp;</span>
+    </a>
+  </div>
+  <div class='function-btn pull-left tags-box'>
+</div>
+
+
 <!-- Modal -->
 <div class="modal fade" id="editArticleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-target="#editArticleModal">
   <div class="modal-dialog">
@@ -12,6 +54,10 @@
       </div>
       <div class="modal-body">
         <textarea id="content-box" style="width: 100%; height: 400px"></textarea>
+        <div class="tags-list clearfix"></div>
+        <div class="tag-box">
+          <input name="tag-input-box" />          
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
