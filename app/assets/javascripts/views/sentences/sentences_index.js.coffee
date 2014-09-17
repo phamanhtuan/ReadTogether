@@ -35,8 +35,8 @@ class ReadTogether.Views.SentencesIndex extends Backbone.View
 
   initWaiting: =>
     $(@el).append(JST["waiting"]())
-    @$(".waiting-overlay").hide()
-    @$(".waiting-overlay").css({"left": $(@el).position().left+"px"})
-    @$(".waiting-overlay").css({"top": $(@el).position().top+"px"})
-    @$(".waiting-overlay").css({"height": $(@el).outerHeight()+"px"})
-    @$(".waiting-overlay").css({"width": $(@el).outerWidth()+"px"})
+    @$(".waiting-screen").css({"left": $(@el).position().left+"px"})
+    @$(".waiting-screen").css({"top": $(@el).position().top+"px"})
+    @$(".waiting-screen").css({"height": $(@el).outerHeight()+"px"})
+    @$(".waiting-screen").css({"width": $(@el).outerWidth()+"px"})
+    @$(".waiting-screen").show()

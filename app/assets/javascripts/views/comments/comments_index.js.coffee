@@ -61,7 +61,6 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 
 	render: ->		
 		$(@el).html(@template({comments: @collection}))
-		@$(".waiting-overlay").hide()
 		if @collection.show
 			addCommentTemplate = new ReadTogether.Views.AddComment()
 			@$("#add-comment").html(addCommentTemplate.render().el)
@@ -75,8 +74,9 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 		commentsTemplate = new ReadTogether.Views.Comment(model: comment)
 		$("#comments-template").append(commentsTemplate.render().el)
 	initWaiting: =>	
-		@$(".waiting-overlay").css({"left": $(@el).position().left+"px"})
-		@$(".waiting-overlay").css({"top": $(@el).position().top+"px"})
-		@$(".waiting-overlay").css({"height": $(@el).outerHeight()+"px"})
-		@$(".waiting-overlay").css({"width": $(@el).outerWidth()+"px"})
-		@$(".waiting-overlay").show()
+		$(@el).append(JST['waiting']())
+		@$(".waiting-screen").css({"left": $(@el).position().left+"px"})
+		@$(".waiting-screen").css({"top": $(@el).position().top+"px"})
+		@$(".waiting-screen").css({"height": $(@el).outerHeight()+"px"})
+		@$(".waiting-screen").css({"width": $(@el).outerWidth()+"px"})
+		@$(".waiting-screen").show()

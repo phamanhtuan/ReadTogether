@@ -7,8 +7,5 @@
 		<p >Click a sentence to add and view all comments</p>
 	</div>
 <% end %>
-<div class="waiting-overlay waiting-screen">
-	<img  src="https://raw.githubusercontent.com/blueimp/Bootstrap-Image-Gallery/master/img/loading.gif">
-</div>
 
 

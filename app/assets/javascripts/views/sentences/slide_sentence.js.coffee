@@ -70,7 +70,6 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
 
   render: ->
     $(@el).html(@template(sentence: @model))
-    $("#slide-waiting-overlay").hide()
     if(@model.show)
       @$(".delete-btn").confirm({
         text: "Are you sure you want to delete that sentence?",
@@ -87,9 +86,10 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
       $(@el).hide()
     @
   initWaiting: =>    
-    @$("#slide-waiting-overlay").css({"left": $(@el).position().left+"px"})
-    @$("#slide-waiting-overlay").css({"top": $(@el).position().top+"px"})
-    @$("#slide-waiting-overlay").css({"height": $(@el).outerHeight()+"px"})
-    @$("#slide-waiting-overlay").css({"width": $(@el).outerWidth()+"px"})
-    @$("#slide-waiting-overlay").show()
+    $(@el).append(JST['waiting']())
+    @$(".waiting-screen").css({"left": $(@el).position().left+"px"})
+    @$(".waiting-screen").css({"top": $(@el).position().top+"px"})
+    @$(".waiting-screen").css({"height": $(@el).outerHeight()+"px"})
+    @$(".waiting-screen").css({"width": $(@el).outerWidth()+"px"})
+    @$(".waiting-screen").show()
     
