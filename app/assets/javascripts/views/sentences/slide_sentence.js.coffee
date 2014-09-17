@@ -59,7 +59,7 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
         @$(".comment-edit-box").focus()   
   initialize: ->
     Backbone.pubSub.on('clickOnSentence', @getSentenceOnEvent)
-    @model.on("change", @render, this)
+    @model.on("sync", @render, this)
 
   getSentenceOnEvent: (options) =>
     @initWaiting()
