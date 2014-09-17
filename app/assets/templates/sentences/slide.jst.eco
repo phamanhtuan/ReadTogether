@@ -6,3 +6,7 @@
 </div>
 <span class="sentence-content"><%= @sentence.get('content') %></span>
 <textarea class="sentence-edit-box" ></textarea>
+<div id="slide-waiting-overlay" class="waiting-screen">
+	<img  src="https://raw.githubusercontent.com/blueimp/Bootstrap-Image-Gallery/master/img/loading.gif">
+</div>
+

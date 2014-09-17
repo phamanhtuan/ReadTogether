@@ -68,10 +68,10 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
     @model.show = true
     @model.fetch()
 
-  render: =>
+  render: ->
+    $(@el).html(@template(sentence: @model))
+    $("#slide-waiting-overlay").hide()
     if(@model.show)
-      $(@el).html(@template(sentence: @model))
-      $(@el).show()
       @$(".delete-btn").confirm({
         text: "Are you sure you want to delete that sentence?",
         title: "Confirmation required",
@@ -82,13 +82,14 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
         post: true
       })
       @$(".sentence-edit-box").hide()  
+      $(@el).show()
     else
       $(@el).hide()
     @
-  initWaiting: =>
-    $(@el).append(JST["waiting"]())
-    @$(".waiting-overlay").hide()
-    @$(".waiting-overlay").css({"left": $(@el).position().left+"px"})
-    @$(".waiting-overlay").css({"top": $(@el).position().top+"px"})
-    @$(".waiting-overlay").css({"height": $(@el).outerHeight()+"px"})
-    @$(".waiting-overlay").css({"width": $(@el).outerWidth()+"px"})
+  initWaiting: =>    
+    @$("#slide-waiting-overlay").css({"left": $(@el).position().left+"px"})
+    @$("#slide-waiting-overlay").css({"top": $(@el).position().top+"px"})
+    @$("#slide-waiting-overlay").css({"height": $(@el).outerHeight()+"px"})
+    @$("#slide-waiting-overlay").css({"width": $(@el).outerWidth()+"px"})
+    @$("#slide-waiting-overlay").show()
+    

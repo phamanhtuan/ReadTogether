@@ -61,9 +61,10 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 
 	render: ->		
 		$(@el).html(@template({comments: @collection}))
+		@$(".waiting-overlay").hide()
 		if @collection.show
 			addCommentTemplate = new ReadTogether.Views.AddComment()
-			$("#add-comment").html(addCommentTemplate.render().el)
+			@$("#add-comment").html(addCommentTemplate.render().el)
 			@collection.each(@renderComment)
 			@$('textarea[name=new-comment]').focus()
 			@$('.comment-btn span').tooltip({ 'trigger': 'hover', 'placement': 'top'})
@@ -73,8 +74,7 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 	renderComment: (comment) ->		
 		commentsTemplate = new ReadTogether.Views.Comment(model: comment)
 		$("#comments-template").append(commentsTemplate.render().el)
-	initWaiting: =>
-		$(@el).append(JST["waiting"]())		
+	initWaiting: =>	
 		@$(".waiting-overlay").css({"left": $(@el).position().left+"px"})
 		@$(".waiting-overlay").css({"top": $(@el).position().top+"px"})
 		@$(".waiting-overlay").css({"height": $(@el).outerHeight()+"px"})
