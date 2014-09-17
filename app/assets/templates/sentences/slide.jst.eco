@@ -1,0 +1,8 @@
+<div class='pull-right'>
+	<span class="edit-btn glyphicon glyphicon-pencil" data-title="edit"></span>
+<% if parseInt(@sentence.get('paragraph')) !=0  :%>	
+	<span class="delete-btn glyphicon glyphicon-remove" data-title="delete"></span>
+<% end %>
+</div>
+<span class="sentence-content"><%= @sentence.get('content') %></span>
+<textarea class="sentence-edit-box" ></textarea>

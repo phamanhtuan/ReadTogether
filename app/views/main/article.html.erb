@@ -3,6 +3,7 @@
 	
 	<%= javascript_include_tag "views/sentences/sentences_index.js" %>
 	<%= javascript_include_tag "views/sentences/sentence.js" %>
+	<%= javascript_include_tag "views/sentences/slide_sentence.js" %>
 
 	<%= javascript_include_tag "views/comments/add_comment.js" %>
 	<%= javascript_include_tag "views/comments/comment.js" %>
@@ -10,6 +11,7 @@
 
 	<%= javascript_include_tag "views/articles/add_articles_index.js" %>
 
+	<%= javascript_include_tag "models/slide_sentence.js" %>
 	<%= javascript_include_tag "models/sentence.js" %>
 	<%= javascript_include_tag "models/comment.js" %>
 	<%= javascript_include_tag "models/sentence.js" %>
@@ -30,7 +32,9 @@
 		<div class="col-md-8 panel panel-default" >
 			<div class="panel-body" id='article'></div>
 		</div>
-		<div class="col-md-4 " id="comment-body" >			
+		<div class="col-md-4 "  >		
+			<div id="slide-sentence"></div>	
+			<div id="comment-body"></div>	
 		</div>
 	<div>
 </div>

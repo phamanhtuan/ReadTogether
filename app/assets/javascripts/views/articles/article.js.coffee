@@ -59,11 +59,13 @@ class ReadTogether.Views.Article extends Backbone.View
 		body = []
 		body_final = []
 		paragraph_id = 1
-		for sentence in @model.get('sentences')
+		for sentence in @model.get('sentences')			
 			if (typeof body[sentence['paragraph']] == 'undefined')
 				body[sentence['paragraph']] = []				
 			body[sentence['paragraph']].push(sentence['content'])
+		# console.log(body)
 		for paragraph in body
+			# console.log(paragraph)
 			body_final.push(paragraph.join(" "))
 		@tags = []
 		for tag in @model.get('tags')

@@ -14,4 +14,6 @@ class ReadTogether.Views.Sentence extends Backbone.View
 
   render: ->
     $(@el).html(@template(sentence: @model))
+    if(@model.active)
+      $(@el).addClass("active")
     @

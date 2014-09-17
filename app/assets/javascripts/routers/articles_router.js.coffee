@@ -18,9 +18,7 @@ class ReadTogether.Routers.Articles extends Backbone.Router
 			@articles_collection.tag = ""
 			@articles_collection.fetch({reset: true})
 			
-
-	tagAction: (tag) =>
-		console.log(tag)
+	tagAction: (tag) =>		
 		if(typeof tag == "undefined" || tag == null)
 			@navigate("", {trigger: true})
 		else			

@@ -2,5 +2,5 @@
 	<span class="edit-btn glyphicon glyphicon-pencil" data-title="edit"></span>
 	<span class="delete-btn glyphicon glyphicon-remove" data-title="delete"></span>
 </div>
-	<span class="comment-content"><%= @comment.get('content') %></span>
-	<textarea class="comment-edit-box" ></textarea>
+<span class="comment-content"><%= @comment.get('content') %></span>
+<textarea class="comment-edit-box" ></textarea>

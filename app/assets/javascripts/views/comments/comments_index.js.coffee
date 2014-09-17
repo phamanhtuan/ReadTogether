@@ -35,6 +35,7 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 	getCommentOnEvent: (options)=>
 		@collection.sentence_id = options.sentence_id	
 		@collection.article_id = options.article_id			
+		@collection.show = true
 		@collection.fetch({reset:true})
 		
 
@@ -59,13 +60,14 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 
 	render: ->		
 		$(@el).html(@template({comments: @collection}))
-		addCommentTemplate = new ReadTogether.Views.AddComment()
-		$("#add-comment").html(addCommentTemplate.render().el)
+		if @collection.show
+			addCommentTemplate = new ReadTogether.Views.AddComment()
+			$("#add-comment").html(addCommentTemplate.render().el)
 
-		@collection.each(@renderComment)
-		@$('textarea[name=new-comment]').focus()
-		@$('.comment-btn span').tooltip({ 'trigger': 'hover', 'placement': 'top'})
-		@$("#pagination").append(JST['pagination']( pageInfo: @collection.pageInfo()))
+			@collection.each(@renderComment)
+			@$('textarea[name=new-comment]').focus()
+			@$('.comment-btn span').tooltip({ 'trigger': 'hover', 'placement': 'top'})
+			@$("#pagination").append(JST['pagination']( pageInfo: @collection.pageInfo()))
 		@
 
 	renderComment: (comment) ->		
