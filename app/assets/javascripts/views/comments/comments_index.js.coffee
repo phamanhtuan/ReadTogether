@@ -33,6 +33,7 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 		@collection.nextPage()
 
 	getCommentOnEvent: (options)=>
+		@initWaiting()
 		@collection.sentence_id = options.sentence_id	
 		@collection.article_id = options.article_id			
 		@collection.show = true
@@ -63,15 +64,19 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 		if @collection.show
 			addCommentTemplate = new ReadTogether.Views.AddComment()
 			$("#add-comment").html(addCommentTemplate.render().el)
-
 			@collection.each(@renderComment)
 			@$('textarea[name=new-comment]').focus()
 			@$('.comment-btn span').tooltip({ 'trigger': 'hover', 'placement': 'top'})
-			@$("#pagination").append(JST['pagination']( pageInfo: @collection.pageInfo()))
+			@$("#pagination").append(JST['pagination']( pageInfo: @collection.pageInfo()))		
 		@
 
 	renderComment: (comment) ->		
 		commentsTemplate = new ReadTogether.Views.Comment(model: comment)
 		$("#comments-template").append(commentsTemplate.render().el)
-		
-		
+	initWaiting: =>
+		$(@el).append(JST["waiting"]())		
+		@$(".waiting-overlay").css({"left": $(@el).position().left+"px"})
+		@$(".waiting-overlay").css({"top": $(@el).position().top+"px"})
+		@$(".waiting-overlay").css({"height": $(@el).outerHeight()+"px"})
+		@$(".waiting-overlay").css({"width": $(@el).outerWidth()+"px"})
+		@$(".waiting-overlay").show()

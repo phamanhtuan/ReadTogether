@@ -6,7 +6,7 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
     'blur .sentence-edit-box': 'blurEventHandle'
     'keydown .sentence-edit-box': 'clickEventHandle'
 
-  clickEventHandle: (event) ->     
+  clickEventHandle: (event) ->    
     if event.keyCode == 13
       event.preventDefault()
       attributes = {'content': @$(".sentence-edit-box").val()}     
@@ -58,10 +58,11 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
         console.log "#{attribute} of comment #{message}" for message in messages  
         @$(".comment-edit-box").focus()   
   initialize: ->
-    Backbone.pubSub.on('clickOnSentence', @getSentenceOnEvent, this)
+    Backbone.pubSub.on('clickOnSentence', @getSentenceOnEvent)
     @model.on("change", @render, this)
 
   getSentenceOnEvent: (options) =>
+    @initWaiting()
     @model.article_id =  options.article_id
     @model.set("id", options.sentence_id)
     @model.show = true
@@ -84,3 +85,10 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
     else
       $(@el).hide()
     @
+  initWaiting: =>
+    $(@el).append(JST["waiting"]())
+    @$(".waiting-overlay").hide()
+    @$(".waiting-overlay").css({"left": $(@el).position().left+"px"})
+    @$(".waiting-overlay").css({"top": $(@el).position().top+"px"})
+    @$(".waiting-overlay").css({"height": $(@el).outerHeight()+"px"})
+    @$(".waiting-overlay").css({"width": $(@el).outerWidth()+"px"})
