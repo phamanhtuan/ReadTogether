@@ -1,0 +1,19 @@
+ <div id="add-vocab">
+   <div class='pull-right'>
+      <span class='glyphicon glyphicon-remove close-add-vocab-box delete-btn' ></span>
+    </div>
+  <div  class='well'>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon">@</div>
+        <input class="form-control" id="word-input" type="text" placeholder="Enter word">
+      </div>
+    </div>
+     <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon">@</div>
+        <input class="form-control" id="meaning-input" type="text" placeholder="Enter meaning">
+      </div>
+    </div>
+  </div>
+</div>

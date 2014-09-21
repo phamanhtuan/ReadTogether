@@ -1,0 +1,16 @@
+
+<div class="panel-heading">
+  <h4 class="panel-title">
+    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne-<%= @vocab.get('word')%>">
+      <span class='word-content'><%= @vocab.get('word')%></span>
+    </a>
+  </h4>
+</div>
+<div id="collapseOne-<%= @vocab.get('word')%>" class="panel-collapse collapse">
+	<div class="panel-body">
+		<% meanings = @vocab.get('translations') %>
+		<% for meaning in meanings :%>
+			<li class='meaning-content' ><%=meaning['meaning']%></li>			
+		<% end %>
+	</div>
+</div>

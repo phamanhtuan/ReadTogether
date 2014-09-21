@@ -5,7 +5,11 @@ class ReadTogether.Views.SlideSentence extends Backbone.View
     "click .edit-btn" : "editSentence"
     'blur .sentence-edit-box': 'blurEventHandle'
     'keydown .sentence-edit-box': 'clickEventHandle'
-
+    'click .sentence-content span': 'clickWord'
+  
+  clickWord: (event) ->
+    # console.log($(event.target).text())
+    Backbone.pubSub.trigger('clickOnWord', {sentence_id: @model.get('id'), word: @$(event.target).text()})
   clickEventHandle: (event) ->    
     if event.keyCode == 13
       event.preventDefault()

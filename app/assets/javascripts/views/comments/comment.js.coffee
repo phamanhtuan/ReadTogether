@@ -21,6 +21,7 @@ class ReadTogether.Views.Comment extends Backbone.View
 			})		
 
 	successfulUpdate: (model, event)->
+		console.log('success')
 	
 	handleError: (model, response) ->		
 		if response.status == 422

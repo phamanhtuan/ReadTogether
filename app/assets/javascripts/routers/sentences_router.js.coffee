@@ -17,4 +17,7 @@ class ReadTogether.Routers.Sentences extends Backbone.Router
 		$("header").append(addingArticle.render().el)
 		slideSentenceView = new ReadTogether.Views.SlideSentence(model: @slide_sentence_model)
 		$("#slide-sentence").html(slideSentenceView.render().el)
+		@vocabularies_collection = new ReadTogether.Collections.Vocabularies()
+		vocabularies_index_view = new ReadTogether.Views.VocabulariesIndex(collection: @vocabularies_collection )
+		$("#vocabularies").html(vocabularies_index_view.render().el)
 

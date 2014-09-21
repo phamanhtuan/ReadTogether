@@ -1,10 +1,19 @@
-<div class='pull-right'>
-	<span class="edit-btn glyphicon glyphicon-pencil" data-title="edit"></span>
-<% if parseInt(@sentence.get('paragraph')) !=0  :%>	
-	<span class="delete-btn glyphicon glyphicon-remove" data-title="delete"></span>
+<% if typeof @sentence.get('content') != "undefined" :%>
+	<div class='pull-right'>
+		<span class="edit-btn glyphicon glyphicon-pencil" data-title="edit"></span>
+	<% if parseInt(@sentence.get('paragraph')) !=0  :%>	
+		<span class="delete-btn glyphicon glyphicon-remove" data-title="delete"></span>
+	<% end %>
+	</div>
+	<span class="sentence-content">
+	<% temp = @sentence.get('content').trim() %>
+	<% words = temp.replace(/\s{2,}/g, ' ').split(" ") %>
+	<% for word in words :%>
+	<span><%= word %></span>
+	<% end %>
+	</span>
+	<textarea class="sentence-edit-box" ></textarea>
+
 <% end %>
-</div>
-<span class="sentence-content"><%= @sentence.get('content') %></span>
-<textarea class="sentence-edit-box" ></textarea>
 
 
