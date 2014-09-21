@@ -23,7 +23,10 @@ class ReadTogether.Views.VocabulariesIndex extends Backbone.View
 			if meaning.length == 0 
 				@$("#meaning-input").focus()
 				return
-			attributes = {'word': word, meaning: meaning}			
+			attributes = {'word': word, meaning: meaning}	
+			@$("#meaning-input").blur()
+			@$("#word-input").blur()
+			@initWaiting()		
 			@collection.create(attributes,
 			{
 				wait: true
@@ -59,3 +62,11 @@ class ReadTogether.Views.VocabulariesIndex extends Backbone.View
 			return
 		view = new ReadTogether.Views.Vocabulary(model: vocab)
 		$(@el).append(view.render().el)
+
+	initWaiting: =>	
+		$(@el).append(JST['waiting']())
+		@$(".waiting-screen").css({"left": $(@el).position().left+"px"})
+		@$(".waiting-screen").css({"top": $(@el).position().top+"px"})
+		@$(".waiting-screen").css({"height": $(@el).outerHeight()+"px"})
+		@$(".waiting-screen").css({"width": $(@el).outerWidth()+"px"})
+		@$(".waiting-screen").show()

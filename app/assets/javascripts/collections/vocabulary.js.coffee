@@ -5,7 +5,6 @@ class ReadTogether.Collections.Vocabularies extends Backbone.Collection
 
 	sync: (method, model, options) ->
 	   	options || (options = {})
-	   	console.log(method)
 	   	if(method =='read')
 	   		options.url = "/api/vocabularies?sentence_id="+@sentence_id
 	   	if(method =='create')

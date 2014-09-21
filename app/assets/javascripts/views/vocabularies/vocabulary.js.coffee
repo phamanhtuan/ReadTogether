@@ -16,6 +16,5 @@ class ReadTogether.Views.Vocabulary extends Backbone.View
 			$(@el).hide()
 
 	render: ->
-		console.log(@model.get('translations').length)
 		$(@el).html(@template(vocab: @model))
 		@
