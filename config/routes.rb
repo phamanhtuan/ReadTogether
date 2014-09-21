@@ -2,6 +2,7 @@ ReadTogether::Application.routes.draw do
   resources :articles
 
   scope "api" do    
+    resources :vocabularies
     resources :tags
     resources :articles do
       resources :sentences do
