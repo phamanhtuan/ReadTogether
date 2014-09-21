@@ -9,10 +9,11 @@ class ReadTogether.Views.Comment extends Backbone.View
 		'blur .comment-edit-box': 'blurEventHandle'
 		'keydown .comment-edit-box': 'clickEventHandle'
 
-	clickEventHandle: (event) ->			
+	clickEventHandle: (event) =>			
 		if event.keyCode == 13
 			event.preventDefault()
-			attributes = {'content': @$(".comment-edit-box").val()}			
+			attributes = {'content': @$(".comment-edit-box").val()}		
+			@initWaiting()	
 			@model.save(attributes,
 			{
 				wait: true
@@ -56,3 +57,11 @@ class ReadTogether.Views.Comment extends Backbone.View
 		    post: true
 		})
 		@
+
+	initWaiting: =>	
+		$(@el).append(JST['waiting']())
+		@$(".waiting-screen").css({"left": $(@el).position().left+"px"})
+		@$(".waiting-screen").css({"top": $(@el).position().top+"px"})
+		@$(".waiting-screen").css({"height": $(@el).outerHeight()+"px"})
+		@$(".waiting-screen").css({"width": $(@el).outerWidth()+"px"})
+		@$(".waiting-screen").show()
