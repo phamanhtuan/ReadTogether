@@ -41,7 +41,6 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 		
 
 	submitAddingComment: (event) =>	
-		@initWaiting()	
 		if event.keyCode == 13
 			event.preventDefault()
 			attributes = {content:@$('textarea[name=new-comment]').val(), sentence_id: @collection.sentence_id}		
