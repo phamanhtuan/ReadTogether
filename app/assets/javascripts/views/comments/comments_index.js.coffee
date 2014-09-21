@@ -44,7 +44,8 @@ class ReadTogether.Views.CommentsIndex extends Backbone.View
 		@initWaiting()	
 		if event.keyCode == 13
 			event.preventDefault()
-			attributes = {content:@$('textarea[name=new-comment]').val(), sentence_id: @collection.sentence_id}			
+			attributes = {content:@$('textarea[name=new-comment]').val(), sentence_id: @collection.sentence_id}		
+			@initWaiting()
 			@collection.create attributes, 
 				wait: true
 				success: -> $('textarea[name=new-comment]').val('')					
